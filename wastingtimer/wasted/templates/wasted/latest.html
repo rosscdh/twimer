@@ -1,0 +1,18 @@
+{% load humanize %}
+{% for w in object_list %}
+<div class="waste span5">
+  <h6>{{ w.extract_time }}min by</h6>
+  
+    <div class="span2">
+      <!-- <span class="create_at">{{ w.created_at|naturaltime }}</span>-->
+    	<a href="{% url 'nprofile:profile' slug=w.user.username %}"><img src="{{ w.user.get_profile.twitter_image }}" title="{{ w.user.username }}" class="user_image small" border="0"/></a>
+    	<a href="{% url 'nprofile:profile' slug=w.user.username %}">{{ w.user.username }}</a>
+    </div>
+    <div class="span9">{{ w.text }}</div>
+  
+</div>
+{% empty %}
+<div class="waste">
+  None Found
+</div>
+{% endfor %}

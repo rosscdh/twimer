@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load wasted_tags cache %}
+{% load url from future %}
+
+{% block body %}
+<div class="row-fluid">
+	<h2>Latest wastes</h2>
+	{% cache 30 wasted.latest.main_list %}
+		{% latest_tweets max=50 %}
+	{% endcache %}
+</div>
+{% endblock %}

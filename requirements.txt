@@ -1,0 +1,59 @@
+django>=1.5
+django-jsonfield
+tweepy
+easydict
+
+# form validation
+django-parsley
+django-crispy-forms
+
+#db
+psycopg2
+
+#imaging for profile pics
+pillow
+
+# debug
+django-debug-toolbar
+
+# login
+django-social-auth
+
+#db migrations
+south
+
+# tags
+django-taggit
+
+djangorestframework
+# markdown
+# pyyaml
+# django-filter
+
+django_extensions
+Werkzeug
+
+# message queue
+django-rq
+
+# python-dateutil
+
+# text analysis
+# fuzzywuzzy
+
+# Testing
+HTTPretty
+mocktest
+django-nose
+factory_boy
+
+#production
+gunicorn
+uwsgi
+django-output-validator 
+
+
+# RQ dash
+# rq-dashboard # install this manually ensure redis-server is running and thn hit localhost:9181
+
+newrelic

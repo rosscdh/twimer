@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block body %}
+  <div class="row-fluid">
+    <h2>All your wastes</h2>
+    {% for w in object_list %}
+      <div class="waste span5">
+        {% if w.user == user %}<div class="pull-right"><a href="{% url 'wasted:edit' pk=w.pk %}">Edit</a></div>{% endif %}
+        <div class="span2">
+            <h6>{{ w.extract_time }}min</h6>
+            <a href="{% url 'nprofile:profile' slug=w.user.username %}"><img src="{{ w.user.get_profile.image_or_placeholder }}" title="{{ w.user.username }}" class="user_image small" border="0"/></a>
+            <a href="{% url 'nprofile:profile' slug=w.user.username %}">{{ w.user.username }}</a>
+        </div>
+        <div class="span9">{{ w.text }}</div>
+        <br/>
+        <div class="pull-right"><small>{{ w.created_at|naturaltime }}</small></div>
+      </div>
+    {% empty %}
+      <div class="waste">
+        None Found
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

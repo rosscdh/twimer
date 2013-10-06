@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load url from future %}
+
+{% block body %}
+  <div class="row">
+    <div class="span12">
+    {% for u in user_list %}
+      <div class="span3 user_profile">
+      	<div class="image_container">
+          <a href="{% url 'nprofile:profile' slug=u.username %}">
+            <img src="{{ u.get_profile.image_or_placeholder }}" title="{{ u.username }}" class="user_image small"/>
+          </a>
+        </div>
+      	<div class="user_info">
+          <a href="{% url 'nprofile:profile' slug=u.username %}">{{ u.username }}</a>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    {% empty %}
+      <div>No records</div>
+    {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

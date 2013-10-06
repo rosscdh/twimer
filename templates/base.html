@@ -1,0 +1,85 @@
+{% load url from future %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>minutes wasted app | keeping track of all your lost time</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="{{ STATIC_URL }}css/flat-ui.css" rel="stylesheet">
+
+    <link href="{{ STATIC_URL }}css/custom.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
+    <![endif]-->
+    {% block css %}{% endblock %}
+  </head>
+  <body>
+    <div class="container">
+       <div class="row">
+        <div class="span12">
+          <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+              <div class="container">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <div class="nav-collapse collapse">
+                  {% include 'theme/nav.html' %}
+                </div><!--/.nav-collapse -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% block body %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>
+            This is a project by <a href="{% url 'theme:about_us' %}">Ross and Tim</a>. &copy; 2013
+        </p>
+    </footer>
+
+
+    <!-- Load JS here for greater good =============================-->
+    <script src="{{ STATIC_URL }}js/jquery-1.8.2.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery-ui-1.10.0.custom.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.dropkick-1.0.0.js"></script>
+    <script src="{{ STATIC_URL }}js/custom_checkbox_and_radio.js"></script>
+    <script src="{{ STATIC_URL }}js/custom_radio.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.tagsinput.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-tooltip.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.placeholder.js"></script>
+    <script src="{{ STATIC_URL }}js/Chart.min.js"></script>
+    <script src="{{ STATIC_URL }}js/parsley.js"></script>
+    <script src="{{ STATIC_URL }}js/parsley.extend.js"></script>
+    <script src="{{ STATIC_URL }}js/custom.js"></script>
+
+    <!--[if lt IE 8]>
+      <script src="{{ STATIC_URL }}js/icon-font-ie7.js"></script>
+      <script src="{{ STATIC_URL }}js/icon-font-ie7-24.js"></script>
+    <![endif]-->
+
+    {% block js %}{% endblock %}
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-39665003-1', 'minuteswastedapp.com');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>

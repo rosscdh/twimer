@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>
+    <img src="{{ object.get_profile.image_or_placeholder }}" title="{{ object.username }}" class="user_image large" />
+    {{ object.username }}
+    <br/>
+    <small>
+        {{ object.get_profile.location }}<br/>
+        <a href="http://twitter.com/{{ object.username }}">
+            {{ object.username }} on Twitter
+        </a>
+    </small>
+</h2>
+<p>&nbsp;</p>
+<div class="row-fluid">
+    <div class="span6">
+        <h4>Total time wasted by category
+            {% if date_of %}<br/><small>{{ date_of|date:"jS F Y" }}</small>{% endif %}
+        </h4>
+        <canvas id="wasted_by_category" width="400" height="400"></canvas>
+    </div>
+
+    <div class="span6">
+        <h4>Categories</h4>
+        <ul id="wasted_category_list" class="span12 unstyled"></ul>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script id="wasted_by_category_data" type="application/json">{{ wasted_list|safe }}</script>
+<script>
+$(document).ready(function(){
+
+    function get_random_color() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++ ) {
+            color += letters[Math.round(Math.random() * 15)];
+        }
+        return color;
+    }
+
+    function capitaliseFirstLetter(string)
+    {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    var wasted_by_category_data = $.parseJSON($('script#wasted_by_category_data').html());
+
+
+    var data = function(data) {
+        var colorized_data = [];
+        $.each(wasted_by_category_data, function(i, item){
+            var d = {}
+            d.name = i;
+            d.value = item;
+            d.color = get_random_color();
+            colorized_data.push(d)
+        })
+        return colorized_data
+    }
+
+    var colorized_data = data(wasted_by_category_data);
+
+    var wasted_by_category = new Chart(document.getElementById("wasted_by_category").getContext("2d")).Doughnut(colorized_data);
+
+    $.each(wasted_by_category_data, function(key, value){
+
+        var color = function(){
+            c = '#000'
+            $.each(colorized_data, function(k,v){
+                if (v.name == key) {
+                    c = v.color
+                    return
+                }
+            });
+            return c;
+        }
+        html = '<span class="span1" style="background-color:'+ color() +';">&nbsp;</span>&nbsp;' + capitaliseFirstLetter(key) + ": " + value + 'min';
+        $('ul#wasted_category_list').append($('<li>', {
+            'style': 'padding:5px;'
+            ,'html': html
+        }));
+    });
+
+});
+</script>
+{% endblock%}

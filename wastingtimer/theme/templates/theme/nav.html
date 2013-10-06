@@ -1,0 +1,40 @@
+<ul class="nav">
+  <li>
+    <a href="/">
+      <em style="color:#16A085;">n</em> Minutes wasted
+    </a>
+  </li>
+  <li>
+    <a href="{% url 'theme:about_us' %}">
+      About Us
+    </a>
+  </li>
+  <li>
+    <a href="{% url 'wasted:latest' %}">
+      Latest
+    </a>
+  </li>
+  <li>
+    <a href="{% url 'wasters:index' %}">
+      Wasters
+    </a>
+  </li>
+  {% if not user.is_authenticated %}
+  <li>
+    <a href="{% url 'socialauth_begin' backend='twitter' %}">
+      Login via Twitter
+    </a>
+  </li>
+  {% else %}
+  <li>
+    <a href="{% url 'theme:profile' slug=user.username %}">
+      Dashboard ({{ user.username }})
+    </a>
+    <ul>
+        <li><a href="{% url 'nprofile:wastage' slug=user.username %}">Your Wastage</a></li>
+        <!--<li><a href="#">Your Categories</a></li>-->
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+  </li>
+  {% endif %}
+</ul>

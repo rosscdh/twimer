@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load wasted_tags cache %}
+
+{% load url from future %}
+
+{% block body %}
+<div class="row-fluid demo-headline">
+  <h1 class="demo-logo">
+    <em style="color:#16A085;">n</em> Minutes wasted
+    <small style="color:#BDC3C7">Keeping track of <em>all</em> your time.</small>
+  </h1>
+    <div id="example_wrapp">
+      <ul id="examples" class="unstyled">
+        <li>Late public transport</li>
+        <li>Waiting to see a doctor/dentist/vet/lawyer</li>
+        <li>Waiting on plumber/telephone technician</li>
+        <li>Being on hold in a call</li>
+        <li>Traffic jams</li>
+        <li>Timesheets</li>
+        <li>Fast food delivery</li>
+        <li>Resturants waiting on your order</li>
+        <li>Waiting for people to show up at meetings</li>
+        <li>Waiting on colleagues</li>
+        <li>Installing software</li>
+        <li>Waiting on SLA notices</li>
+      </ul>
+    </div>
+</div> <!-- /demo-headline -->
+
+<div class="hero-unit">
+      <h2>Don't login!</h2>
+      <p>Just start sending tweets in the format shown in the example below.</p>
+
+      <h2>How do I record my time</h2>
+      <p>Simply send a tweet like:
+        <br/>
+        <code>@minutes_wasted 0:15 #traffic_jam On my way to work! Need more coffee</code>
+      </p>
+      <p>We record this tweet, and create the #traffic_jam category for future use, as well as store the message for your records.</p>
+      <p>You can then keep a record of all the time that you "<i>waste</i>"!</p>
+      <p>&nbsp;</p>
+
+      <h2>But I dont want the world to know what I'm spending my time on?</h2>
+      <p>No problem, simply send a tweet like the example above introducing yourself to @minutes_wasted (who will then follow you), and then you can follow @minutes_wasted which lets you <strong><em>direct message</em></strong> your private records.</p>
+      <p>&nbsp;</p>
+
+      <h2>Whats it look like?</h2>
+      <p>It is a bit basic at the moment, but we are open to suggestion.</p>
+      <p><img src="{{ STATIC_URL }}images/dash-basic.png" alt="Basic Overview" title="Basic Overview"/></p>
+  
+</div>
+
+<div class="row-fluid">
+
+      <h2>Latest</h2>
+      {% cache 30 wasted.latest.front_page %}
+        {% latest_tweets max=6 %}
+      {% endcache %}
+
+</div>
+{% endblock %}

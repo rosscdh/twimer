@@ -1,0 +1,44 @@
+{% extends 'base.html' %}{% load wasted_tags cache crispy_forms_tags humanize i18n %}
+{% load url from future %}
+
+{% block body %}
+<div class="hero-unit">
+    <div class=""><b>Created:</b>&nbsp;<small>{{ object.created_at|naturaltime }} ({{ object.created_at }})</small></div>
+    <div class=""><b>Source:</b>&nbsp;<small>{{ object.source }}</small></div>
+    {% if object.geo %}<div class=""><b>Geo:</b>&nbsp;<small>{{ object.geo }}</small></div>{% endif %}
+    <div class=""><b>Categories:</b>&nbsp;<ul id="tag_list" class="unstyled"></ul></div>
+</div>
+<div class="row-fluid">
+    <form id="edit-tweet" data-validate="parsley" action="{% url 'wasted:edit' pk=object.pk %}" method="POST">{% csrf_token %}
+        {{ form|crispy }}
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn">{% trans 'Update' %}</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block css %}
+<style>
+form textarea{
+    height:90px;
+}
+</style>
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function(){
+    var tags = {{ object.hashtags|as_json_string }};
+    $('#id_tweet').addClass('span7')
+    $.each(tags, function(i,item){
+        $('#tag_list').append($('<li/>',{
+            class: 'span'
+            ,html: '<small><em>'+item+'</em></small>'
+        }))
+    })
+});
+</script>
+{% endblock %}
