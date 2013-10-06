@@ -3,11 +3,11 @@ twimer
 
 GPL v3. A simple twitter based time recorder - good for contractors and recording wasted or invested time
 
-
+```
 pip install virtualenv virtualenvwrapper : http://virtualenvwrapper.readthedocs.org/en/latest/
 pip install -r requirements.txt
-
 python mange.py syncdb
+```
 
 Add these key=value to your settings.py 
 
@@ -35,4 +35,3 @@ python manage.py fetch_mentions
 
 # Fetch direct messages
 python manage.py fetch_direct_messages
-=======
